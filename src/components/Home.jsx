@@ -10,7 +10,8 @@ const Home = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault()
-    history.push('/user')
+
+    history.push(`/user/${username}`)
   }
 
   return (

@@ -1,37 +1,63 @@
-import React from 'react'
-
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useContext, useEffect } from 'react'
+import { GithubContext } from '../../context/context'
+import { useParams } from 'react-router-dom'
 const MainSection = () => {
+  const {
+    githubUser: {
+      avatar_url,
+      name,
+      company,
+      location,
+      login,
+      created_at,
+      followers: followersCount,
+      following: followingCount,
+      public_repos,
+      html_url,
+    },
+
+    searchGithubUser,
+  } = useContext(GithubContext)
+  const { username } = useParams()
+
+  useEffect(() => {
+    searchGithubUser(username || 'abdrr97')
+  }, [])
+
   return (
     <section className='wrapper'>
       <article className='wrapper__profile-info'>
-        <img
-          src='https://avatars.githubusercontent.com/u/42917967?v=4'
-          alt=''
-        />
+        <img src={avatar_url} alt={name} />
 
-        <h3 className='name'>Abderrahmane</h3>
+        <h3 className='name'>{name}</h3>
 
-        <a className='username' href='/'>
-          @abdrr97
+        <a
+          className='username'
+          href={html_url}
+          target='_blank'
+          rel='noreferrer'
+        >
+          @{login}
         </a>
 
         <div className='wrapper__general-info'>
           <ul>
-            <li>@EpicGames</li>
-            <li>Casablanca</li>
-            <li>Joined September 2, 2018</li>
+            <li>{company}</li>
+            <li>{location}</li>
+            <li>Joined {new Date(created_at).toDateString()}</li>
           </ul>
           <div className='repos__info-boxes'>
             <div className='repos__info-box'>
-              <span>26</span>
+              <span>{public_repos}</span>
               <span>REPOSITORIES</span>
             </div>
             <div className='repos__info-box'>
-              <span>0</span>
+              <span>{followersCount}</span>
               <span>FOLLOWERS</span>
             </div>
             <div className='repos__info-box'>
-              <span>3</span>
+              <span>{followingCount}</span>
               <span>FOLLOWING</span>
             </div>
           </div>
