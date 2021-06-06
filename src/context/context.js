@@ -15,7 +15,7 @@ const GithubProvider = ({ children }) => {
   const [followers, setFollowers] = useState(mockFollowers)
 
   const [requests, setRequests] = useState(0)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState({
     show: false,
     msg: '',
@@ -46,12 +46,15 @@ const GithubProvider = ({ children }) => {
         // make request to followers of the user
         fetch(`${followers_url}?per_page=100`)
           .then((res) => res.json())
-          .then((followers) => setFollowers(followers))
+          .then((followers) => {
+            setFollowers(followers)
+            setLoading(false)
+          })
 
         setGithubUser(data)
       })
       .catch((e) => console.log(e))
-    setLoading(false)
+
     checkRequests()
   }
   useEffect(checkRequests, [])
