@@ -4,14 +4,20 @@ import { useHistory } from 'react-router-dom'
 const Home = () => {
   document.body.className = 'main'
   const [username, setUsername] = useState('')
+  const [error, setError] = useState(false)
   const history = useHistory()
   const handleChange = (e) => {
     setUsername(e.target.value)
+    setError(false)
   }
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    history.push(`/user/${username}`)
+    if (username) {
+      history.push(`/user/${username}`)
+    } else {
+      setError(true)
+    }
   }
 
   return (
@@ -24,9 +30,10 @@ const Home = () => {
           ></path>
         </svg>
         <h3 className='header-3'>Find your Github Profile</h3>
+        <h3 className='header-3 error'>{error && 'username is empty'}</h3>
         <input
           autoFocus
-          className='username'
+          className={error ? 'username  error' : 'username'}
           type='text'
           value={username}
           placeholder='username'

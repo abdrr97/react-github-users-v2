@@ -1,8 +1,9 @@
 import React from 'react'
-import Home from './components/Home'
+import Home from './pages/Home'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import GithubUser from './components/GithubUser'
+import GithubUser from './pages/GithubUser'
 import { GithubProvider } from './context/context'
+import Error from './pages/Error'
 
 export const App = () => {
   return (
@@ -15,6 +16,9 @@ export const App = () => {
             </Route>
             <Route path='/user/:username'>
               <GithubUser />
+            </Route>
+            <Route path='*'>
+              <Error />
             </Route>
           </Switch>
         </Router>

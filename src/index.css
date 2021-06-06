@@ -60,6 +60,15 @@ input.username {
   font-family: 'Ubuntu', sans-serif;
   color: #3387f3;
 }
+input.username.error {
+  border: 2px solid rgb(223, 49, 49);
+}
+.header-3.error {
+  color: rgb(223, 49, 49);
+  font-size: 25px;
+  letter-spacing: 1.2px;
+}
+
 /* End First Page */
 
 h2 {
